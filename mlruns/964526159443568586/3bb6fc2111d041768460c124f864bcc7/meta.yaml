@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/IRISFlow/mlruns/964526159443568586/3bb6fc2111d041768460c124f864bcc7/artifacts
+end_time: 1754156527156
+entry_point_name: ''
+experiment_id: '964526159443568586'
+lifecycle_stage: active
+run_id: 3bb6fc2111d041768460c124f864bcc7
+run_name: Housing-DecisionTreeRegressor
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1754156523021
+status: 3
+tags: []
+user_id: dell

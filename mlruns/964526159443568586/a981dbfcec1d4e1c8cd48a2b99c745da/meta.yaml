@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/IRISFlow/mlruns/964526159443568586/a981dbfcec1d4e1c8cd48a2b99c745da/artifacts
+end_time: 1754156534935
+entry_point_name: ''
+experiment_id: '964526159443568586'
+lifecycle_stage: active
+run_id: a981dbfcec1d4e1c8cd48a2b99c745da
+run_name: Iris-RandomForestClassifier
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1754156530968
+status: 3
+tags: []
+user_id: dell
