@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/IRISFlow/mlruns/459256955879908756/df62977493e44ad5ba5bd4371ec8f007/artifacts
+end_time: 1754221235970
+entry_point_name: ''
+experiment_id: '459256955879908756'
+lifecycle_stage: active
+run_id: df62977493e44ad5ba5bd4371ec8f007
+run_name: Housing-LinearRegression
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1754221230042
+status: 3
+tags: []
+user_id: dell
