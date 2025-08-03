@@ -45,7 +45,7 @@ jobs:
         run: echo "${{ env.DOCKER_PASSWORD }}" | docker login -u "${{ env.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t vishnuvuppala03/housing-api:latest .
+        run: docker build -t vishnuvuppala03/housing-api:latest . -f src/Dockerfile
 
       - name: Push Docker image
         run: docker push yourdockerhubusername/housing-api:latest
