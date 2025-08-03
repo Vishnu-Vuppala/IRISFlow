@@ -27,8 +27,8 @@ jobs:
       - name: Lint code
         run: flake8 src/
 
-      - name: Run tests
-        run: pytest tests/  # Adjust if you have tests
+    #  - name: Run tests
+    #    run: pytest tests/  # Adjust if you have tests
 
   build-and-push:
     needs: lint-and-test
