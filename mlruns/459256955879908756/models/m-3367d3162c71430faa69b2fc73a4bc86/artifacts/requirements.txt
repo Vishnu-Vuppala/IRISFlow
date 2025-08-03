@@ -1,6 +1,3 @@
-fastapi
-uvicorn
-cloudpickle
 mlflow==3.1.4
 cloudpickle==3.1.1
 numpy==1.26.4

@@ -1,0 +1,10 @@
+artifact_location: file:///D:/IRISFlow/mlruns/459256955879908756/models/m-a5e5fc2575c94a0c82db69413f6f48d4/artifacts
+creation_timestamp: 1754230687813
+experiment_id: '459256955879908756'
+last_updated_timestamp: 1754230699030
+model_id: m-a5e5fc2575c94a0c82db69413f6f48d4
+model_type: null
+name: model
+source_run_id: 13fd7671b2c9442fad4a5ad80b673942
+status: 2
+status_message: null
