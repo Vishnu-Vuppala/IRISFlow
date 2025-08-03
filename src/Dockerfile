@@ -5,8 +5,10 @@ WORKDIR /app
 # Copy requirements (create requirements.txt if not present)
 COPY requirements.txt .
 
+
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+#RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Copy your API code
 COPY src/housing_api.py .
