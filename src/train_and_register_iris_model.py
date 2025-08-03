@@ -4,7 +4,12 @@ import mlflow
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+)
 from mlflow.models.signature import infer_signature
 from mlflow.tracking import MlflowClient
 
@@ -14,11 +19,13 @@ iris = pd.read_csv("data/iris/iris.csv")
 X = iris.drop("target", axis=1)
 y = iris["target"]
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
 models = {
     "LogisticRegression": LogisticRegression(max_iter=200),
-    "RandomForestClassifier": RandomForestClassifier(n_estimators=100)
+    "RandomForestClassifier": RandomForestClassifier(n_estimators=100),
 }
 
 client = MlflowClient()
@@ -38,15 +45,14 @@ for name, model in models.items():
         mlflow.set_tag("type", "classification")
         mlflow.log_param("model", name)
         mlflow.log_params(model.get_params())
-        mlflow.log_metrics({
-            "accuracy": acc,
-            "precision": prec,
-            "recall": rec,
-            "f1_score": f1
-        })
+        mlflow.log_metrics(
+            {"accuracy": acc, "precision": prec, "recall": rec, "f1_score": f1}
+        )
 
         signature = infer_signature(X_test, preds)
-        mlflow.sklearn.log_model(model, "model", signature=signature, input_example=X_test[:1])
+        mlflow.sklearn.log_model(
+            model, "model", signature=signature, input_example=X_test[:1]
+        )
 
         print(f"[Iris] {name} Accuracy: {acc:.4f}")
 
@@ -54,7 +60,7 @@ for name, model in models.items():
             best_acc = acc
             best_model_info = {
                 "name": f"Iris-{name}",
-                "run_id": mlflow.active_run().info.run_id
+                "run_id": mlflow.active_run().info.run_id,
             }
 
 # if best_model_info:
@@ -62,15 +68,20 @@ for name, model in models.items():
 #     registered_model_name = best_model_info["name"]
 #     try:
 #         client.create_registered_model(registered_model_name)
-#     except:
+#     except Exception:
 #         pass
-#     client.create_model_version(name=registered_model_name, source=model_uri, run_id=best_model_info["run_id"])
-#     print(f"✅ Best iris model '{registered_model_name}' registered.")
+# client.create_model_version(
+#     name=registered_model_name,
+#     source=model_uri,
+#     run_id=best_model_info["run_id"]
+# )
+# print(f"✅ Best iris model '{registered_model_name}' registered.")
+
 
 if best_model_info:
     model_uri = f"runs:/{best_model_info['run_id']}/model"
     registered_model_name = best_model_info["name"]
-    
+
     try:
         mlflow.register_model(model_uri=model_uri, name=registered_model_name)
         print(f"✅ Best Iris model '{registered_model_name}' registered.")

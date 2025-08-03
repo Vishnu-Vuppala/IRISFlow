@@ -10,12 +10,14 @@ model = mlflow.pyfunc.load_model(model_uri=f"models:/{model_name}/1")
 
 label_map = {0.0: "setosa", 1.0: "versicolor", 2.0: "virginica"}
 
+
 # Match input names to training schema
 class IrisInput(BaseModel):
     sepal_length__cm_: float
     sepal_width__cm_: float
     petal_length__cm_: float
     petal_width__cm_: float
+
 
 @app.post("/predict")
 def predict(data: IrisInput):

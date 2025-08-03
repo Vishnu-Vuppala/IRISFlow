@@ -17,11 +17,13 @@ housing = pd.read_csv("data/housing/housing.csv")
 X = housing.drop("target", axis=1)
 y = housing["target"]
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
 models = {
     "LinearRegression": LinearRegression(),
-    "DecisionTreeRegressor": DecisionTreeRegressor(max_depth=5)
+    "DecisionTreeRegressor": DecisionTreeRegressor(max_depth=5),
 }
 
 client = MlflowClient()
@@ -42,7 +44,9 @@ for name, model in models.items():
         mlflow.log_metrics({"rmse": rmse, "r2_score": r2})
 
         signature = infer_signature(X_test, preds)
-        mlflow.sklearn.log_model(model, "model", signature=signature, input_example=X_test[:1])
+        mlflow.sklearn.log_model(
+            model, "model", signature=signature, input_example=X_test[:1]
+        )
 
         print(f"[Housing] {name} RMSE: {rmse:.4f}")
 
@@ -50,7 +54,7 @@ for name, model in models.items():
             best_rmse = rmse
             best_model_info = {
                 "name": f"Housing-{name}",
-                "run_id": mlflow.active_run().info.run_id
+                "run_id": mlflow.active_run().info.run_id,
             }
 
 if best_model_info:
@@ -61,8 +65,6 @@ if best_model_info:
         print(f"✅ Best housing model '{registered_model_name}' registered.")
     except Exception as e:
         print(f"⚠️ Model registration failed: {e}")
-
-# Save model locally so Docker container can use it
 local_model_path = "housing_model"
 Path(local_model_path).mkdir(exist_ok=True)
 mlflow.sklearn.save_model(model, path=local_model_path)
